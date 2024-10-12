@@ -1,7 +1,7 @@
  # Update the plist
 
  # Run with: 
- # python update_plist.py path/to/Info.plist 1.2.3
+ # python3 update_plist.py path/to/Info.plist 1.2.3
 
 import plistlib
 import sys
