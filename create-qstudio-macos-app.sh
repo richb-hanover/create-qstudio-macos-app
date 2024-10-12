@@ -27,15 +27,15 @@ wget  -q -O qStudio.app/Contents/Resources/qstudio.jar "$QSTUDIO_DOWNLOAD"
 mkdir -p qStudio.app/Contents/Resources/x86/
 mkdir -p qStudio.app/Contents/Resources/arm64/
 
-echo "Downloading prqlc x86 binary"
+echo "Downloading prqlc binary x86"
 wget -O - -q "https://github.com/PRQL/prql/releases/download/$PRQLC_VERSION/prqlc-$PRQLC_VERSION-x86_64-apple-darwin.tar.gz" | \
 	tar -xz -C qStudio.app/Contents/Resources/x86/   prqlc
 
-echo "Downloading prql arm64 binary"
+echo "Downloading prqlc binary arm64"
 wget -O - -q "https://github.com/PRQL/prql/releases/download/$PRQLC_VERSION/prqlc-$PRQLC_VERSION-aarch64-apple-darwin.tar.gz" | \
 	tar -xz -C qStudio.app/Contents/Resources/arm64/ prqlc
 
-# Copy the "script to execute" into the bundle & make it executable
+# Copy the script that launches the .jar file into the bundle & make it executable
 echo "Adding startup script"
 mkdir -p qStudio.app/Contents/MacOS
 cp run-qstudio.sh qStudio.app/Contents/MacOS/run-qstudio.sh
@@ -46,7 +46,8 @@ echo "Updating Info.plist"
 cp Info.plist qStudio.app/Contents
 NEW_VERSION="qStudio $QSTUDIO_VERSION - prqlc $PRQLC_VERSION"
 plist_path="qStudio.app/Contents/Info.plist"
-/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $NEW_VERSION" "$plist_path"
+python ./update_plist.py "$plist_path" "$NEW_VERSION"
+# cat qStudio.app/Contents/Info.plist
 
 # Copy in the .icns file
 echo "Adding .icns"
