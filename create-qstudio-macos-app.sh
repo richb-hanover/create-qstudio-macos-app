@@ -29,11 +29,11 @@ mkdir -p qStudio.app/Contents/Resources/arm64/
 
 echo "Downloading prqlc binary x86"
 wget -O - -q "https://github.com/PRQL/prql/releases/download/$PRQLC_VERSION/prqlc-$PRQLC_VERSION-x86_64-apple-darwin.tar.gz" | \
-	tar -xz -C qStudio.app/Contents/Resources/x86/   prqlc
+	tar -xz -f - -C qStudio.app/Contents/Resources/x86/ ./prqlc 
 
 echo "Downloading prqlc binary arm64"
 wget -O - -q "https://github.com/PRQL/prql/releases/download/$PRQLC_VERSION/prqlc-$PRQLC_VERSION-aarch64-apple-darwin.tar.gz" | \
-	tar -xz -C qStudio.app/Contents/Resources/arm64/ prqlc
+	tar -xz -f - -C qStudio.app/Contents/Resources/arm64/ ./prqlc 
 
 # Copy the script that launches the .jar file into the bundle & make it executable
 echo "Adding startup script"
