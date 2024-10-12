@@ -46,7 +46,7 @@ echo "Updating Info.plist"
 cp Info.plist qStudio.app/Contents
 NEW_VERSION="qStudio $QSTUDIO_VERSION - prqlc $PRQLC_VERSION"
 plist_path="qStudio.app/Contents/Info.plist"
-python ./update_plist.py "$plist_path" "$NEW_VERSION"
+python3 ./update_plist.py "$plist_path" "$NEW_VERSION"
 # cat qStudio.app/Contents/Info.plist
 
 # Copy in the .icns file
