@@ -18,5 +18,6 @@ if java -version &> /dev/null; then
 else
     echo "Java is not installed."
     stderr_output=$(java -version 2>&1 1>/dev/null)
-    osascript -e 'display alert "Java not installed" message "$stderr_output" as critical buttons {"OK"} default button "OK"'
+    # osascript -e 'display alert "Java not installed" message "$stderr_output" as critical buttons {"OK"} default button "OK"'
+    osascript -e "display alert \"Java is not installed\" message \"$stderr_output\" as critical buttons {\"OK\"} default button \"OK\""
 fi
