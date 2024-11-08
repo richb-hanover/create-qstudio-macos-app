@@ -78,6 +78,16 @@ To use the script:
   may not appear in the Finder.
   **Get info...** usually forces the Finder to update it.
 
+## Testing
+
+The result has received minimal testing
+and seems to work as expected on:
+macos 10.15 (Catalina - Intel),
+macOS 12.7.6 (Intel),
+macOS 14.6.1 (arm64, Apple Silicon),
+macOS 15.1 (Apple Silicon), and
+macOS 15.0.1 (Intel)
+
 ## icns generation
 
 The `.icns` file in this repo was generated from the `.png` image of the
@@ -85,9 +95,13 @@ qStudio icon taken from the screen of the qStudio site.
 It was converted to a `.icns` format using this site:
 https://cloudconvert.com/png-to-icns
 
-## Testing
+## Uploading qStudio.app
 
-The result has received minimal testing on
-macos 10.15 (Catalina - Intel),
-macOS 12.7.6 (Intel), and
-macOS 14.6.1 (arm64, Apple Silicon).
+Until the qStudio site includes the macOS bundle
+as a standard build, I have placed it on my website at:
+
+[https://randomneuronsfiring.com/wp-content/uploads/qStudio.zip](https://randomneuronsfiring.com/wp-content/uploads/qStudio.zip)
+
+Create a `.zip` archive of _qStudio.app_, then
+use the File Manager of the web hosting
+software to upload new versions.

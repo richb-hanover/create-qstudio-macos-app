@@ -1,2 +1,6 @@
+# Ignore...
 qStudio.app/*
 prqlc
+
+# ... and the zip'ed version for uploading
+qStudio.zip
