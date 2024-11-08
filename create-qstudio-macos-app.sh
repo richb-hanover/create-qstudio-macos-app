@@ -10,9 +10,16 @@
 # Output is a clickable app, saved within the repo
 # The app bundle is .gitignored, so the repo isn't too big
 
-QSTUDIO_VERSION="3.10"
-PRQLC_VERSION="0.13.1"
+QSTUDIO_VERSION="3.81"
+PRQLC_VERSION="0.13.2"
 QSTUDIO_DOWNLOAD="https://www.timestored.com/qstudio/files/qstudio.jar"
+
+# qStudio download is at: https://www.timestored.com/qstudio/download
+# prqlc downloads are at: https://github.com/PRQL/prql/releases
+
+echo ""
+echo "*** Update qStudio and prqlc version numbers within the script before running..."
+echo ""
 
 # Remove the previous qStudio.app bundle and rebuild anew
 rm -rf qStudio.app

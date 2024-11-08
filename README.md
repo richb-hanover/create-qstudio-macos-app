@@ -78,6 +78,13 @@ To use the script:
   may not appear in the Finder.
   **Get info...** usually forces the Finder to update it.
 
+## icns generation
+
+The `.icns` file in this repo was generated from the `.png` image of the
+qStudio icon taken from the screen of the qStudio site.
+It was converted to a `.icns` format using this site:
+https://cloudconvert.com/png-to-icns
+
 ## Testing
 
 The result has received minimal testing on
