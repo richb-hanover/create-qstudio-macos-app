@@ -2,23 +2,37 @@
 
 # Create a clickable macOS app bundle from the downloaded qStudio
 
-# Usage: sh ./create-qstudio-macos-app.sh 
+# Usage: sh ./create-qstudio-macos-app.sh [beta]
 #
 # For example:
 #  sh ./create-qstudio-macos-app.sh 
 
+# If a "beta" option is provided, this script downloads and builds the beta-test qStudio
+# The script does NOT automatically update the qStudio version based on production/beta
+
 # Output is a clickable app, saved within the repo
-# The app bundle is .gitignored, so the repo isn't too big
+# .gitignore the app bundle and its .zip, so the repo isn't too big
 
-QSTUDIO_VERSION="3.81"
 PRQLC_VERSION="0.13.2"
-QSTUDIO_DOWNLOAD="https://www.timestored.com/qstudio/files/qstudio.jar"
+QSTUDIO_PRODUCTION_VERSION="3.81"
+QSTUDIO_BETA_VERSION="3.86"
 
-# qStudio download is at: https://www.timestored.com/qstudio/download
-# prqlc downloads are at: https://github.com/PRQL/prql/releases
+QSTUDIO_DOWNLOAD="https://www.timestored.com/qstudio/files/qstudio.jar"
+QSTUDIO_BETA_DOWNLOAD="https://www.timestored.com/qstudio/files/beta/qstudio.jar"
+PRQLC_RELEASES="https://github.com/PRQL/prql/releases"
 
 echo ""
 echo "*** Update qStudio and prqlc version numbers within the script before running..."
+if [ "$1" == "" ]; then
+	QSTUDIO_URL="$QSTUDIO_DOWNLOAD"
+	echo "*** Building production release: Version $QSTUDIO_PRODUCTION_VERSION"
+elif [ "$1" == "beta" ]; then
+	QSTUDIO_URL="$QSTUDIO_BETA_DOWNLOAD"
+	echo "*** Building beta release: Version $QSTUDIO_BETA_VERSION"
+else
+	echo "*** Unknown option '$1' ***"
+	exit
+fi
 echo ""
 
 # Remove the previous qStudio.app bundle and rebuild anew
@@ -27,19 +41,19 @@ rm -rf qStudio.app
 # Download the qStudio .jar file from the qStudio server
 echo "Downloading qStudio.jar"
 mkdir -p qStudio.app/Contents/Resources
-wget  -q -O qStudio.app/Contents/Resources/qstudio.jar "$QSTUDIO_DOWNLOAD"
+wget  -q -O qStudio.app/Contents/Resources/qstudio.jar "$QSTUDIO_URL"
 
 # Get both the x86 and arm64 versions of `prqlc`
 # prqlc is about 18 megabytes, so it's not too big a deal to import both
-mkdir -p qStudio.app/Contents/Resources/x86/
-mkdir -p qStudio.app/Contents/Resources/arm64/
 
 echo "Downloading prqlc binary x86"
-wget -O - -q "https://github.com/PRQL/prql/releases/download/$PRQLC_VERSION/prqlc-$PRQLC_VERSION-x86_64-apple-darwin.tar.gz" | \
+mkdir -p qStudio.app/Contents/Resources/x86/
+wget -O - -q "$PRQLC_RELEASES/download/$PRQLC_VERSION/prqlc-$PRQLC_VERSION-x86_64-apple-darwin.tar.gz" | \
 	tar -xz -f - -C qStudio.app/Contents/Resources/x86/ ./prqlc 
 
 echo "Downloading prqlc binary arm64"
-wget -O - -q "https://github.com/PRQL/prql/releases/download/$PRQLC_VERSION/prqlc-$PRQLC_VERSION-aarch64-apple-darwin.tar.gz" | \
+mkdir -p qStudio.app/Contents/Resources/arm64/
+wget -O - -q "$PRQLC_RELEASES/download/$PRQLC_VERSION/prqlc-$PRQLC_VERSION-aarch64-apple-darwin.tar.gz" | \
 	tar -xz -f - -C qStudio.app/Contents/Resources/arm64/ ./prqlc 
 
 # Copy the script that launches the .jar file into the bundle & make it executable
@@ -51,7 +65,8 @@ chmod +x qStudio.app/Contents/MacOS/run-qstudio.sh
 # Copy in the Info.plist & update short version string
 echo "Updating Info.plist"
 cp Info.plist qStudio.app/Contents
-NEW_VERSION="qStudio $QSTUDIO_VERSION - prqlc $PRQLC_VERSION"
+TODAY=`date +"%d%b%Y"`
+NEW_VERSION="qStudio $QSTUDIO_VERSION - prqlc $PRQLC_VERSION - $TODAY"
 plist_path="qStudio.app/Contents/Info.plist"
 python3 ./update_plist.py "$plist_path" "$NEW_VERSION"
 # cat qStudio.app/Contents/Info.plist
