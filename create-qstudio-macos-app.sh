@@ -14,10 +14,10 @@
 # .gitignore the app bundle and its .zip, so the repo isn't too big
 
 PRQLC_VERSION="0.13.2"
-QSTUDIO_PRODUCTION_VERSION="3.81"
+QSTUDIO_PRODUCTION_VERSION="4.01"
 QSTUDIO_BETA_VERSION="3.86"
 
-QSTUDIO_DOWNLOAD="https://www.timestored.com/qstudio/files/qstudio.jar"
+QSTUDIO_DOWNLOAD="https://github.com/timestored/qstudio/releases/download/$QSTUDIO_PRODUCTION_VERSION/qstudio.jar"
 QSTUDIO_BETA_DOWNLOAD="https://www.timestored.com/qstudio/files/beta/qstudio.jar"
 PRQLC_RELEASES="https://github.com/PRQL/prql/releases"
 
@@ -25,9 +25,11 @@ echo ""
 echo "*** Update qStudio and prqlc version numbers within the script before running..."
 if [ "$1" == "" ]; then
 	QSTUDIO_URL="$QSTUDIO_DOWNLOAD"
+	QSTUDIO_VERSION="$QSTUDIO_PRODUCTION_VERSION"
 	echo "*** Building production release: Version $QSTUDIO_PRODUCTION_VERSION"
 elif [ "$1" == "beta" ]; then
 	QSTUDIO_URL="$QSTUDIO_BETA_DOWNLOAD"
+	QSTUDIO_VERSION="$QSTUDIO_BETA_VERSION"
 	echo "*** Building beta release: Version $QSTUDIO_BETA_VERSION"
 else
 	echo "*** Unknown option '$1' ***"
