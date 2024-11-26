@@ -78,6 +78,13 @@ To use the script:
   may not appear in the Finder.
   **Get info...** usually forces the Finder to update it.
 
+4. _Note:_ The _CFBundleVersion.txt_ file gets incremented every time
+  the app gets rebuilt. This helps the Finder be sure to read
+  the other meta-data to show the proper version string.
+  If others are jointly releasing the app, be sure to push the
+  files to the main repo before someone else pulls it to ensure the
+  CFBundleVersion always increments
+
 ## Testing
 
 The result has received minimal testing

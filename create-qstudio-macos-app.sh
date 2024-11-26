@@ -21,6 +21,18 @@ QSTUDIO_DOWNLOAD="https://github.com/timestored/qstudio/releases/download/$QSTUD
 QSTUDIO_BETA_DOWNLOAD="https://www.timestored.com/qstudio/files/beta/qstudio.jar"
 PRQLC_RELEASES="https://github.com/PRQL/prql/releases"
 
+VERSION_FILE="CFBundleVersion.txt"
+if [[ -f "$VERSION_FILE" ]]; then
+  CURRENT_VERSION=$(cat "$VERSION_FILE")
+else
+  echo "Version file not found!"
+  exit 1
+fi
+# Increment the version
+NEW_VERSION=$((CURRENT_VERSION + 1))
+# Update the version file
+echo "$NEW_VERSION" > "$VERSION_FILE"
+
 echo ""
 echo "*** Update qStudio and prqlc version numbers within the script before running..."
 if [ "$1" == "" ]; then
@@ -68,9 +80,9 @@ chmod +x qStudio.app/Contents/MacOS/run-qstudio.sh
 echo "Updating Info.plist"
 cp Info.plist qStudio.app/Contents
 TODAY=`date +"%d%b%Y"`
-NEW_VERSION="qStudio $QSTUDIO_VERSION - prqlc $PRQLC_VERSION - $TODAY"
+NEW_STRING="qStudio $QSTUDIO_VERSION - prqlc $PRQLC_VERSION - $TODAY"
 plist_path="qStudio.app/Contents/Info.plist"
-python3 ./update_plist.py "$plist_path" "$NEW_VERSION"
+python3 ./update_plist.py "$plist_path" "$NEW_STRING" "$NEW_VERSION"
 # cat qStudio.app/Contents/Info.plist
 
 # Copy in the .icns file
