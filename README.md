@@ -1,6 +1,6 @@
-# Create qStudio.app - a clickable macOS app bundle
+# Create QStudio.app - a clickable macOS app bundle
 
-The [qStudio application](https://www.timestored.com/qstudio/prql-ide)
+The [QStudio application](https://www.timestored.com/qstudio/prql-ide)
 is currently distributed as a `.jar` file.
 On macOS, people need to launch it from the command line.
 Furthermore, using
@@ -17,7 +17,7 @@ and double-clicked.
 
 **Provisos:** One-time actions to use the app
 
-* Double-clicking the app launches qStudio as desired, but
+* Double-clicking the app launches QStudio as desired, but
   this app bundle is not signed.
   The Finder will produce an "unverified developer" warning.
   Go to **System Preference -> Security** to accept and open the app.
@@ -27,12 +27,12 @@ and double-clicked.
 
 ## How it works
 
-The script bundles the qStudio `.jar` file,
+The script bundles the QStudio `.jar` file,
 the `prqlc` compilers for both for x86 and arm64 (Apple Silicon),
 an icon for the application,
 and the necessary startup script.
 It also sets the Finder version info to
-the string "qStudio VERSION - prqlc VERSION". 
+the string "QStudio VERSION - prqlc VERSION". 
 
 The build script runs on any Linux/macOS computer.
 In addition to the shell, it requires `python3`.
@@ -44,13 +44,13 @@ in the proper directory of the bundle.
 The final layout is:
 
 ```
-qStudio.app/
+QStudio.app/
 ├── Contents/
     ├── MacOS/
     │   └── run-qstudio.sh
     ├── Resources/
     │   │── qstudio.jar
-    │   │── qStudio.icns
+    │   │── QStudio.icns
     │   |── arm64
     │   |   └── prqlc
     │   └── x86
@@ -72,7 +72,7 @@ To use the script:
   cd this-repo
   sh ./create-qstudio-macos-app.sh
   ```
-3. The qStudio.app bundle is built in the top level
+3. The QStudio.app bundle is built in the top level
   of the directory. 
   Immediately after being built, the bundle's icon
   may not appear in the Finder.
@@ -124,13 +124,13 @@ Use this command: `sh ./png-to-icns.sh -i path-to-png`
 Rename the resulting `.icns` file, and move back to the
 desired folder.
 
-## Uploading qStudio.app
+## Uploading QStudio.app
 
-Until the qStudio site includes the macOS bundle
+Until the QStudio site includes the macOS bundle
 as a standard build, I have placed it on my website at:
 
-[https://randomneuronsfiring.com/wp-content/uploads/qStudio.zip](https://randomneuronsfiring.com/wp-content/uploads/qStudio.zip)
+[https://randomneuronsfiring.com/wp-content/uploads/QStudio.zip](https://randomneuronsfiring.com/wp-content/uploads/QStudio.zip)
 
-Create a `.zip` archive of _qStudio.app_, then
+Create a `.zip` archive of _QStudio.app_, then
 use the File Manager of the web hosting
 software to upload new versions.
