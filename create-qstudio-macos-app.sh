@@ -5,7 +5,8 @@
 # Usage: sh ./create-qstudio-macos-app.sh [beta]
 #
 # For example:
-#  sh ./create-qstudio-macos-app.sh 
+#  sh ./create-qstudio-macos-app.sh  -or-
+#  sh ./create-qstudio-macos-app.sh beta
 
 # If a "beta" option is provided, this script downloads and builds the beta-test QStudio
 # The script does NOT automatically update the QStudio version based on production/beta
@@ -14,7 +15,7 @@
 # .gitignore the app bundle and its .zip, so the repo isn't too big
 
 PRQLC_VERSION="0.13.2"
-QSTUDIO_PRODUCTION_VERSION="4.02"
+QSTUDIO_PRODUCTION_VERSION="4.03"
 QSTUDIO_BETA_VERSION="3.86"
 
 QSTUDIO_DOWNLOAD="https://github.com/timestored/qstudio/releases/download/$QSTUDIO_PRODUCTION_VERSION/qstudio.jar"
