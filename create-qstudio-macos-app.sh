@@ -14,8 +14,8 @@
 # Output is a clickable app, saved within the repo
 # .gitignore the app bundle and its .zip, so the repo isn't too big
 
-PRQLC_VERSION="0.13.4"
-QSTUDIO_PRODUCTION_VERSION="4.08"
+PRQLC_VERSION="0.13.10"
+QSTUDIO_PRODUCTION_VERSION="5.01"
 QSTUDIO_BETA_VERSION="3.86"
 
 QSTUDIO_DOWNLOAD="https://github.com/timestored/qstudio/releases/download/$QSTUDIO_PRODUCTION_VERSION/qstudio.jar"
